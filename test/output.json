@@ -1,0 +1,35 @@
+[{
+  "parents": ["a69c0f41e07350cb05d86f10637875dddeaeaa14"],
+  "hash": "806d880e4e78f677d2726a3ad0e4d0e8ce371283",
+  "author": {
+    "name": "Alexandru Vladutu",
+    "email": "alexandru.vladutu@gmail.com",
+    "timestamp": 1400835056,
+    "timezone": "+0300"
+  },
+  "committer": {
+    "name": "Alexandru Vladutu",
+    "email": "alexandru.vladutu@gmail.com",
+    "timestamp": 1400835056,
+    "timezone": "+0300"
+  },
+  "title": "wip",
+  "description": ""
+}, {
+  "parents": ["d6f680b128a4f2ddf45febbd8dbd467370515b75"],
+  "hash": "a69c0f41e07350cb05d86f10637875dddeaeaa14",
+  "author": {
+    "name": "Alexandru Vladutu",
+    "email": "alexandru.vladutu@gmail.com",
+    "timestamp": 1400591882,
+    "timezone": "+0300"
+  },
+  "committer": {
+    "name": "Alexandru Vladutu",
+    "email": "alexandru.vladutu@gmail.com",
+    "timestamp": 1400591882,
+    "timezone": "+0300"
+  },
+  "title": "submoduleS",
+  "description": ""
+}]
