@@ -1,6 +1,6 @@
 {
   "name": "git-commits",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Get the commit history of a repo in a Node streamy way (shelling out to git-rev-list(1)).",
   "main": "index.js",
   "dependencies": {
