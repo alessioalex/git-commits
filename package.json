@@ -5,7 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "git-spawned-stream": "~0.1.0",
-    "split-transform-stream": "~0.1.1"
+    "split-transform-stream": "~0.1.1",
+    "git-parse-commit": "0.0.1"
   },
   "devDependencies": {
     "proxyquire": "~1.0.0",
