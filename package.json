@@ -9,9 +9,9 @@
     "git-parse-commit": "0.0.1"
   },
   "devDependencies": {
-    "proxyquire": "~1.0.0",
-    "should": "~3.3.2",
-    "mocha": "~1.19.0"
+    "proxyquire": "~1.7.3",
+    "should": "~7.1.1",
+    "mocha": "~2.3.4"
   },
   "scripts": {
     "test": "mocha"
