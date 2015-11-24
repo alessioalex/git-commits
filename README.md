@@ -31,39 +31,40 @@ gitCommits(repoPath, {
 
 Sample output:
 
-```
-$ REPO=../www2/rails/.git node example.js
-
-{ parents: [ '3baaedb2b61cad3cae60b0c5546214a0e8cd637b' ],
-  hash: 'fb0df8e3edc8732b71bd88df5d9d17f0f1d4f58f',
+```bash
+→ node example.js
+{ parents: [ '3460bc096c20e04e022915f77a6195059b76a893' ],
+  hash: '86e567818bf22952f325a151eb0124d1b45c55f8',
+  tree: '36672c28ca465e9fa80e71f7015fd71bd9470837',
   author:
    { name: 'Alexandru Vladutu',
-     email: 'alessio.ijoomla@gmail.com',
-     timestamp: 1372795642,
+     email: 'alexandru.vladutu@gmail.com',
+     timestamp: 1407092756,
      timezone: '+0300' },
   committer:
    { name: 'Alexandru Vladutu',
-     email: 'alessio.ijoomla@gmail.com',
-     timestamp: 1372795642,
+     email: 'alexandru.vladutu@gmail.com',
+     timestamp: 1407092756,
      timezone: '+0300' },
-  title: 'asasa',
+  title: 'bump to v0.1.2',
   description: '' }
 
 ------------------
 
-{ parents: [ '40f33824dd17b154e58837cad526d177daf134d1' ],
-  hash: '3baaedb2b61cad3cae60b0c5546214a0e8cd637b',
+{ parents: [ '392fc8d013ed95e85fcab9988f45601bf93c0ed0' ],
+  hash: '3460bc096c20e04e022915f77a6195059b76a893',
+  tree: '23ab88115c31a236bcf75d462319c7ce933fc33a',
   author:
    { name: 'Alexandru Vladutu',
-     email: 'alessio.ijoomla@gmail.com',
-     timestamp: 1371056733,
+     email: 'alexandru.vladutu@gmail.com',
+     timestamp: 1407092681,
      timezone: '+0300' },
   committer:
    { name: 'Alexandru Vladutu',
-     email: 'alessio.ijoomla@gmail.com',
-     timestamp: 1371056733,
+     email: 'alexandru.vladutu@gmail.com',
+     timestamp: 1407092681,
      timezone: '+0300' },
-  title: 'stufffffff',
+  title: 'Updated parser',
   description: '' }
 
 ------------------
