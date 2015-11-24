@@ -1,4 +1,5 @@
-"use strict";
+/* eslint-disable no-console, func-names */
+'use strict';
 
 var gitCommits = require('./');
 var path = require('path');
@@ -12,5 +13,5 @@ gitCommits(repoPath, {
 }).on('error', function(err) {
   throw err;
 }).on('end', function() {
-  console.log("That's all, folks!");
+  console.log('That\'s all, folks!');
 });

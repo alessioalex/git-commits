@@ -1,20 +1,29 @@
-"use strict";
+'use strict';
 
 var streamCommits = require('./lib/parser');
 var gitSpawnedStream = require('git-spawned-stream');
 
-function streamHistory(repoPath, opts) {
-  opts = opts || {};
+function streamHistory(repoPath, ops) {
+  var opts = ops || {};
   var searchIn = '';
+  var searchType = '';
   var rev = opts.rev || 'HEAD';
-  var limit = (opts.limit) ? ("--max-count=" + opts.limit) : '';
-  var skip = (opts.skip) ? ("--skip=" + opts.skip) : '';
+  var limit = (opts.limit) ? ('--max-count=' + opts.limit) : '';
+  var skip = (opts.skip) ? ('--skip=' + opts.skip) : '';
   var file = opts.file || '';
-  var since = (since = ((opts.since || opts.after) || null)) ? ('--since=' + since) : null;
-  var until = (until = ((opts.until || opts.before) || null)) ? ('--until=' + until) : null;
+  var since;
+  var until;
+
+  if (opts.since || opts.after) {
+    since = '--since=' + (opts.since || opts.after);
+  }
+
+  if (opts.until || opts.before) {
+    since = '--until=' + (opts.until || opts.before);
+  }
 
   if (opts.searchTerm) {
-    var searchType  = (opts.regex == false) ? "--fixed-strings" : "--extended-regexp";
+    searchType  = !opts.regex ? '--fixed-strings' : '--extended-regexp';
     var term = opts.searchTerm.replace(/'/g, '').replace(/"/g, '');
 
     if (!opts.searchIn || opts.searchIn === 'messages') {
@@ -29,12 +38,17 @@ function streamHistory(repoPath, opts) {
       }
     }
 
-    searchIn += "=" + term;
+    searchIn += '=' + term;
   }
 
   var args = ['rev-list', '--header', '--regexp-ignore-case'];
-  [searchIn, searchType, since, until, limit, skip, rev, '--', file].forEach(function(el) {
-    if (el) { args.push(el); }
+
+  [
+    searchIn, searchType, since, until, limit, skip, rev, '--', file
+  ].forEach(function addOptions(el) {
+    if (el) {
+      args.push(el);
+    }
   });
 
   return streamCommits(gitSpawnedStream(repoPath, args));
