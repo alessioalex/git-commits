@@ -1,6 +1,6 @@
 # git-commits
 
-Get the commit history of a repo in a Node streamy way (shelling out to git-rev-list(1)).
+Get the commit history of a repo in a Node streamy way by shelling out to [git-rev-list(1)](https://www.kernel.org/pub/software/scm/git/docs/git-rev-list.html).
 
 [![build status](https://secure.travis-ci.org/alessioalex/git-commits.png)](http://travis-ci.org/alessioalex/git-commits)
 
