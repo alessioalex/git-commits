@@ -2,6 +2,8 @@
 
 Get the commit history of a repo in a Node streamy way (shelling out to git-rev-list(1)).
 
+[![build status](https://secure.travis-ci.org/alessioalex/git-commits.png)](http://travis-ci.org/alessioalex/git-commits)
+
 ## Usage
 
 ```js
