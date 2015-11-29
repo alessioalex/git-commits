@@ -10,7 +10,7 @@ function streamHistory(repoPath, ops) {
   var rev = opts.rev || 'HEAD';
   var limit = (opts.limit) ? ('--max-count=' + opts.limit) : '';
   var skip = (opts.skip) ? ('--skip=' + opts.skip) : '';
-  var file = opts.file || '';
+  var path = opts.path || opts.file || '';
   var since;
   var until;
 
@@ -44,7 +44,7 @@ function streamHistory(repoPath, ops) {
   var args = ['rev-list', '--header', '--regexp-ignore-case'];
 
   [
-    searchIn, searchType, since, until, limit, skip, rev, '--', file
+    searchIn, searchType, since, until, limit, skip, rev, '--', path
   ].forEach(function addOptions(el) {
     if (el) {
       args.push(el);
