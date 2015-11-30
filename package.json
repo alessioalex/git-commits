@@ -4,9 +4,9 @@
   "description": "Get the commit history of a repo in a Node streamy way (shelling out to git-rev-list(1)).",
   "main": "index.js",
   "dependencies": {
+    "git-parse-commit": "^0.0.1",
     "git-spawned-stream": "^0.1.1",
-    "split-transform-stream": "^0.1.1",
-    "git-parse-commit": "^0.0.1"
+    "split-transform-stream": "^1.0.0"
   },
   "devDependencies": {
     "alessioalex-standard": "^1.1.0",
