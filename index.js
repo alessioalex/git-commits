@@ -19,7 +19,7 @@ function streamHistory(repoPath, ops) {
   }
 
   if (opts.until || opts.before) {
-    since = '--until=' + (opts.until || opts.before);
+    until = '--until=' + (opts.until || opts.before);
   }
 
   if (opts.searchTerm) {
