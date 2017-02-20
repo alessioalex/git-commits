@@ -35,10 +35,46 @@ describe('', function() {
       'git-spawned-stream': function(path, argz) {
         path.should.eql(repoPath);
 
-        var args = ['rev-list', '--header', '--regexp-ignore-case'];
+        var args = ['rev-list', '--header'];
         args.push('--max-count=' + opts.limit);
         args.push(opts.rev);
         args.push('--');
+
+        args.should.eql(argz);
+
+        return 'git-spawned-stream';
+      }
+    });
+
+    gitCommits(repoPath, opts);
+  });
+
+  it('should create the command correctly', function() {
+    var repoPath = '/home/node.git';
+    var opts = {
+      rev: ['master', '^v1.0.0'],
+      searchTerm: ['fix', 'feat'],
+      regex: true
+    };
+
+    var gitCommits = proxyquire('../', {
+      './lib/parser': function(inputStream) {
+        inputStream.should.eql('git-spawned-stream');
+      },
+      'git-spawned-stream': function(path, argz) {
+        path.should.eql(repoPath);
+
+        var args = [
+          'rev-list',
+          '--header',
+          '--extended-regexp',
+          '--regexp-ignore-case',
+          '--grep=fix',
+          '--grep=feat',
+          'master',
+          '^v1.0.0',
+          '--'
+        ];
 
         args.should.eql(argz);
 
