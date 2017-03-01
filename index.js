@@ -3,53 +3,72 @@
 var streamCommits = require('./lib/parser');
 var gitSpawnedStream = require('git-spawned-stream');
 
+function addFlag(args, flag, value) {
+  if (!value || !flag) {
+    return args.length;
+  }
+
+  if (Array.isArray(value)) {
+    return value.map(function addItem(item) {
+      return addFlag(args, flag, item);
+    }).pop();
+  }
+
+  if (value === true) {
+    return args.push(flag);
+  }
+
+  return args.push(flag + '=' + value);
+}
+
+function searchType(opts) {
+  switch (opts.searchIn) {
+
+  case 'author':
+  case 'authors':
+    return '--author';
+
+  case 'committer':
+  case 'committers':
+    return '--committer';
+
+  default:
+    return '--grep';
+
+  }
+}
+
+function escapeTerm(term) {
+  return term.replace(/'/g, '').replace(/"/g, '');
+}
+
 function streamHistory(repoPath, ops) {
   var opts = ops || {};
-  var searchIn = '';
-  var searchType = '';
-  var rev = opts.rev || 'HEAD';
-  var limit = (opts.limit) ? ('--max-count=' + opts.limit) : '';
-  var skip = (opts.skip) ? ('--skip=' + opts.skip) : '';
-  var path = opts.path || opts.file || '';
-  var since;
-  var until;
+  var args = ['rev-list', '--header'];
 
-  if (opts.since || opts.after) {
-    since = '--since=' + (opts.since || opts.after);
-  }
-
-  if (opts.until || opts.before) {
-    until = '--until=' + (opts.until || opts.before);
-  }
+  addFlag(args, '--max-count', opts.limit);
+  addFlag(args, '--skip', opts.skip);
+  addFlag(args, '--since', opts.since || opts.after);
+  addFlag(args, '--until', opts.until || opts.before);
 
   if (opts.searchTerm) {
-    searchType  = !opts.regex ? '--fixed-strings' : '--extended-regexp';
-    var term = opts.searchTerm.replace(/'/g, '').replace(/"/g, '');
+    var terms = [].concat(opts.searchTerm).map(escapeTerm);
+    var searchIn = searchType(opts);
+    var isRegex = Boolean(opts.regex);
 
-    if (!opts.searchIn || opts.searchIn === 'messages') {
-      searchIn = '--grep';
-    } else {
-      if (opts.searchIn === 'authors') {
-        searchIn = '--author';
-      } else if (opts.searchIn === 'committers') {
-        searchIn = '--committer';
-      } else {
-        searchIn = '--grep';
-      }
-    }
-
-    searchIn += '=' + term;
+    addFlag(args, '--extended-regexp', isRegex);
+    addFlag(args, '--fixed-strings', !isRegex);
+    addFlag(args, '--regexp-ignore-case', true);
+    addFlag(args, searchIn, terms);
   }
 
-  var args = ['rev-list', '--header', '--regexp-ignore-case'];
+  var posArgs = [].concat(
+    opts.rev || 'HEAD',
+    '--',
+    opts.path || opts.file || []
+  );
 
-  [
-    searchIn, searchType, since, until, limit, skip, rev, '--', path
-  ].forEach(function addOptions(el) {
-    if (el) {
-      args.push(el);
-    }
-  });
+  Array.prototype.push.apply(args, posArgs);
 
   return streamCommits(gitSpawnedStream(repoPath, args));
 }
